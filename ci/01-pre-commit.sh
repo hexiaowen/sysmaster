@@ -14,6 +14,10 @@ function finish() {
 }
 
 trap finish EXIT
+
+rustlist=`git diff master --stat | awk '{print $1}' | grep \.rs$ | tr '\n' ' '`
+grep -P '[\p{Han}]' $rustlist && echo "rust 源码文件中禁用中文字符" && exit 1
+
 pip3 install pre-commit -i http://mirrors.aliyun.com/pypi/simple/ || pip3 install  -i https://pypi.tuna.tsinghua.edu.cn/simple/ pre-commit || pip3 install pre-commit
 
 ## one PR ? Commit
