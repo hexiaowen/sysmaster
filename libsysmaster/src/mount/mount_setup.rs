@@ -122,9 +122,9 @@ lazy_static! {
 
         MountPoint {
             source: String::from("cgroup"),
-            target: String::from("/sys/fs/cgroup/process1"),
+            target: String::from("/sys/fs/cgroup/sysmaster"),
             fs_type: String::from("cgroup"),
-            options: Some("none,name=process1".to_string()),
+            options: Some("none,name=sysmaster".to_string()),
             flags: MsFlags::MS_NOSUID | MsFlags::MS_NOEXEC | MsFlags::MS_NODEV,
             callback: Some(cg_legacy_wanted),
             mode: MountMode::MNT_WRITABLE,
@@ -388,7 +388,7 @@ fn cg_unified_wanted() -> bool {
         return v == CgType::UnifiedV2;
     }
 
-    let ret = proc_cmdline::proc_cmdline_get_bool("process1.unified_cgroup_hierarchy");
+    let ret = proc_cmdline::proc_cmdline_get_bool("sysmaster.unified_cgroup_hierarchy");
     if let Ok(v) = ret {
         return v;
     }
@@ -420,7 +420,7 @@ fn cg_unifiedv1_wanted() -> bool {
         return v != CgType::UnifiedV2;
     }
 
-    let ret = proc_cmdline::proc_cmdline_get_bool("process1.unified_v1_controller");
+    let ret = proc_cmdline::proc_cmdline_get_bool("sysmaster.unified_v1_controller");
     if let Ok(v) = ret {
         return v;
     }

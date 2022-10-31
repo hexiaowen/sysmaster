@@ -19,7 +19,7 @@ use std::{
     path::PathBuf, rc::Rc,
 };
 
-const NOTIFY_SOCKET: &str = "/run/process1/notify";
+const NOTIFY_SOCKET: &str = "/run/sysmaster/notify";
 
 pub(super) struct NotifyManager {
     // associated objects

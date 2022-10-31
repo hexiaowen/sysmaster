@@ -24,7 +24,7 @@ bitflags! {
 pub enum CgType {
     /// cgroup is not mounted
     None,
-    /// cgroup v1 mounted to /sys/fs/cgroup/process1
+    /// cgroup v1 mounted to /sys/fs/cgroup/sysmaster
     Legacy,
     /// cgroup v2 mounted to /sys/fs/cgroup/unifed
     UnifiedV1,

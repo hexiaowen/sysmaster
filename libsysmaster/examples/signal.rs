@@ -1,5 +1,5 @@
 //! test unit signal
-use process1::manager::{Action, ManagerX, Mode};
+use libsysmaster::manager::{Action, ManagerX, Mode};
 use std::env;
 
 use libutils::logger;

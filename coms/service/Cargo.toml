@@ -12,9 +12,9 @@ name = "service"
 [dependencies]
 libutils = { path = "../../libs/libutils" }
 libcgroup = { path = "../../libs/libcgroup" }
-process1 = { path = "../../process1" }
 libevent = { path = "../../libs/libevent" }
 libwatchdog = { path = "../../libs/libwatchdog" }
+libsysmaster = { path = "../../libsysmaster" }
 
 dynamic_reload = "0.8.0"
 strum = { version = "0.23", features = ["derive"] }

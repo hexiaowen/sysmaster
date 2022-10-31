@@ -3,12 +3,12 @@ use super::mount_comm::MountUmComm;
 use super::mount_rentry::{MountRe, MountReFrame};
 use libevent::{EventState, EventType, Events, Source};
 use libmount::mountinfo;
-use libutils::logger;
-use libutils::{Error, Result};
-use process1::manager::{
+use libsysmaster::manager::{
     ReliLastFrame, UnitActiveState, UnitManager, UnitManagerObj, UnitMngUtil, UnitType,
 };
-use process1::{ReStation, Reliability};
+use libsysmaster::{ReStation, Reliability};
+use libutils::logger;
+use libutils::{Error, Result};
 use std::cell::RefCell;
 use std::collections::HashSet;
 use std::fs::File;
@@ -428,7 +428,7 @@ impl Default for MountManager {
     }
 }
 
-use process1::declure_umobj_plugin;
+use libsysmaster::declure_umobj_plugin;
 declure_umobj_plugin!(MountManager, MountManager::default, PLUGIN_NAME, LOG_LEVEL);
 
 #[cfg(test)]

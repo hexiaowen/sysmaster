@@ -1,31 +1,31 @@
-//!Plugin provides a plug-in management mechanism, completes the dynamic loading of unit subclasses,
-//! and loads the so files in the specified directory. The priority of the specified directory is as follows:
-//!a. First find the dynamic library under the /usr/lib/process1/plugin/ path
-//!b. Find the output directory of the rust cargo build such as target/debug/ or target/release
-//!c. The path specified by the PROCESS_LIB_LOAD_PATH environment variable.
-//!In the development stage of using cargo, the two methods b and c actually point to the /target/debug or release directory
-//! under the checkout directory of the process1 project, for example
-//!process1 is cloned into the /home/test directory, the output directory is /home/test/target/debug or release directory
-//!2. The subclass type and the corresponding so mapping relationship configuration file, the default search path is the same as
-//! the search path of the subclass dynamic library. The path of the file under the source tree is process1/conf/plugin.conf
-//!In the development stage, it will be released to the /target/debug or release directory by default through the build script.
-//! This stage does not need to be concerned. If you need to run process1 separately,
-//!The configuration file needs to be copied from the build release directory (target/debug/conf) to the
-//! /usr/lib/process1/plugin directory, otherwise process1 cannot load the corresponding so file.
-//!Change the configuration format of the file to unitType:soname, such as:
-//!````text
-//!Service:libservice
-//!Target:libtarget
-//!Socket: libsocket
-//!````
-//!3. The implementation of the subclass imports the following macro definitions
-//!```macro_rules
-//!const LOG_LEVEL: u32 = 4;
-//!const PLUGIN_NAME: &str = "TargetUnit";
-//!use process1::declure_unitobj_plugin;
-//!declure_unitobj_plugin!(Target, Target::default, PLUGIN_NAME, LOG_LEVEL);
-//!````
-//!plugin or find the corresponding so according to the name of the corresponding unit configuration file, and load it dynamically, such as XXX.service to find libservice.so, XXX.socket to find libsocket.so
+//! Plugin provides a plug-in management mechanism, completes the dynamic loading of unit subclasses,
+//!  and loads the so files in the specified directory. The priority of the specified directory is as follows:
+//! a. First find the dynamic library under the /usr/lib/sysmaster/plugin/ path
+//! b. Find the output directory of the rust cargo build such as target/debug/ or target/release
+//! c. The path specified by the PROCESS_LIB_LOAD_PATH environment variable.
+//! In the development stage of using cargo, the two methods b and c actually point to the /target/debug or release directory
+//!  under the checkout directory of the sysmaster project, for example
+//! sysmaster is cloned into the /home/test directory, the output directory is /home/test/target/debug or release directory
+//! 2. The subclass type and the corresponding so mapping relationship configuration file, the default search path is the same as
+//!  the search path of the subclass dynamic library. The path of the file under the source tree is sysmaster/conf/plugin.conf
+//! In the development stage, it will be released to the /target/debug or release directory by default through the build script.
+//!  This stage does not need to be concerned. If you need to run sysmaster separately,
+//! The configuration file needs to be copied from the build release directory (target/debug/conf) to the
+//!  /usr/lib/sysmaster/plugin directory, otherwise sysmaster cannot load the corresponding so file.
+//! Change the configuration format of the file to unitType:soname, such as:
+//! ````text
+//! Service:libservice
+//! Target:libtarget
+//! Socket: libsocket
+//! ````
+//! 3. The implementation of the subclass imports the following macro definitions
+//! ```macro_rules
+//! const LOG_LEVEL: u32 = 4;
+//! const PLUGIN_NAME: &str = "TargetUnit";
+//! use libsysmaster::declure_unitobj_plugin;
+//! declure_unitobj_plugin!(Target, Target::default, PLUGIN_NAME, LOG_LEVEL);
+//! ````
+//! plugin or find the corresponding so according to the name of the corresponding unit configuration file, and load it dynamically, such as XXX.service to find libservice.so, XXX.socket to find libsocket.so
 //!
 use super::manager::{UnitManagerObj, UnitSubClass, UnitType};
 use dy_re::Lib;
@@ -44,7 +44,7 @@ use std::{collections::HashMap, error::Error, path::PathBuf, sync::Arc};
 use std::{env, io};
 use walkdir::{DirEntry, WalkDir};
 
-const LIB_PLUGIN_PATH: &str = "/usr/lib/process1/plugin/";
+const LIB_PLUGIN_PATH: &str = "/usr/lib/sysmaster/plugin/";
 
 static INSTANCE: Lazy<Arc<Plugin>> = Lazy::new(|| {
     let plugin = Plugin::new();
@@ -57,7 +57,7 @@ static INSTANCE: Lazy<Arc<Plugin>> = Lazy::new(|| {
 
 /// Plugin provides a plug-in management mechanism, completes the dynamic loading of unit subclasses,
 /// and loads the so files in the specified directory. The priority of the specified directory is as follows:
-//a. First find the dynamic library under the /usr/lib/process1/plugin/ path
+//a. First find the dynamic library under the /usr/lib/sysmaster/plugin/ path
 ///b. Find the output directory of the rust cargo build such as target/debug/ or target/release
 ///c. The path specified by the PROCESS_LIB_LOAD_PATH environment variable.
 pub struct Plugin {
@@ -172,7 +172,7 @@ impl Plugin {
     /// # Examples
     ///
     /// ```
-    /// use process1::plugin::Plugin;
+    /// use libsysmaster::plugin::Plugin;
     ///
     /// Plugin::get_instance();
     /// ```
@@ -331,7 +331,7 @@ impl Plugin {
         }
     }
     ///
-    /// default plugin library path is /usr/lib/process1/plugin/
+    /// default plugin library path is /usr/lib/sysmaster/plugin/
     /// if you want respecfic yourself path invoke this interface
     /// if the path is not different than last one the path will update
     /// add lib will reload

@@ -6,6 +6,11 @@ use super::service_rentry::{
 };
 use super::service_spawn::ServiceSpawn;
 use libevent::{EventState, EventType, Events, Source};
+use libsysmaster::manager::{
+    ExecCommand, ExecContext, ExecFlags, KillOperation, UnitActionError, UnitActiveState,
+    UnitNotifyFlags,
+};
+use libsysmaster::ReStation;
 use libutils::{fd_util, Error, IN_SET};
 use libutils::{file_util, process_util};
 use nix::errno::Errno;
@@ -14,11 +19,6 @@ use nix::sys::inotify::{AddWatchFlags, InitFlags, Inotify, WatchDescriptor};
 use nix::sys::signal::Signal;
 use nix::sys::socket::UnixCredentials;
 use nix::unistd::Pid;
-use process1::manager::{
-    ExecCommand, ExecContext, ExecFlags, KillOperation, UnitActionError, UnitActiveState,
-    UnitNotifyFlags,
-};
-use process1::ReStation;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::fmt;
@@ -696,7 +696,7 @@ impl ServiceMng {
     fn valid_main_pid(&self, pid: Pid) -> Result<bool, Error> {
         if pid == nix::unistd::getpid() {
             return Err(Error::Other {
-                msg: "main pid is the process1's pid",
+                msg: "main pid is the sysmaster's pid",
             });
         }
 

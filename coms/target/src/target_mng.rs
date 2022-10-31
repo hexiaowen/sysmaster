@@ -2,9 +2,9 @@
 //!
 use super::target_comm::TargetUnitComm;
 use super::target_rentry::TargetState;
+use libsysmaster::manager::{UnitActionError, UnitActiveState, UnitNotifyFlags};
+use libsysmaster::ReStation;
 use libutils::IN_SET;
-use process1::manager::{UnitActionError, UnitActiveState, UnitNotifyFlags};
-use process1::ReStation;
 use std::{cell::RefCell, rc::Rc};
 
 impl TargetState {

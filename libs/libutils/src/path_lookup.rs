@@ -1,9 +1,9 @@
 //! path look up lib
 use std::env;
 
-const ETC_SYSTEM_PATH: &str = "/etc/process1";
-const RUN_SYSTEM_PATH: &str = "/run/process1";
-const LIB_SYSTEM_PATH: &str = "/usr/lib/process1";
+const ETC_SYSTEM_PATH: &str = "/etc/sysmaster";
+const RUN_SYSTEM_PATH: &str = "/run/sysmaster";
+const LIB_SYSTEM_PATH: &str = "/usr/lib/sysmaster";
 
 /// struct LookupPaths
 #[derive(Debug, Clone)]

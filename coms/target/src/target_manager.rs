@@ -1,8 +1,8 @@
 use super::target_base::{LOG_LEVEL, PLUGIN_NAME};
 use super::target_comm::TargetUmComm;
+use libsysmaster::manager::{UnitManager, UnitManagerObj, UnitMngUtil};
+use libsysmaster::{ReStation, Reliability};
 use libutils::logger;
-use process1::manager::{UnitManager, UnitManagerObj, UnitMngUtil};
-use process1::{ReStation, Reliability};
 use std::rc::Rc;
 use std::sync::Arc;
 
@@ -48,7 +48,7 @@ impl Default for TargetManager {
     }
 }
 
-use process1::declure_umobj_plugin;
+use libsysmaster::declure_umobj_plugin;
 declure_umobj_plugin!(
     TargetManager,
     TargetManager::default,

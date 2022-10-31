@@ -22,7 +22,7 @@ use libutils::IN_SET;
 
 const CG_BASE_DIR: &str = "/sys/fs/cgroup";
 const CG_UNIFIED_DIR: &str = "/sys/fs/cgroup/unified";
-const CG_V1_DIR: &str = "/sys/fs/cgroup/process1";
+const CG_V1_DIR: &str = "/sys/fs/cgroup/sysmaster";
 
 /// return the cgroup mounted type, if not support cgroup return CgroupErr.
 pub fn cg_type() -> Result<CgType, CgroupErr> {

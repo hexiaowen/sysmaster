@@ -4,10 +4,10 @@
 use super::mount_base::{LOG_LEVEL, PLUGIN_NAME};
 use super::mount_comm::MountUnitComm;
 use super::mount_mng::MountMng;
+use libsysmaster::manager::{UnitActiveState, UnitManager, UnitMngUtil, UnitObj, UnitSubClass};
+use libsysmaster::{ReStation, Reliability};
 use libutils::logger;
 use nix::{sys::signal::Signal, unistd::Pid};
-use process1::manager::{UnitActiveState, UnitManager, UnitMngUtil, UnitObj, UnitSubClass};
-use process1::{ReStation, Reliability};
 use std::path::PathBuf;
 use std::rc::Rc;
 
@@ -61,7 +61,7 @@ impl UnitObj for MountUnit {
         self.mng.mount_state_to_unit_state()
     }
 
-    fn attach_unit(&self, unit: Rc<process1::manager::Unit>) {
+    fn attach_unit(&self, unit: Rc<libsysmaster::manager::Unit>) {
         self.comm.attach_unit(unit);
         self.db_insert();
     }
@@ -72,12 +72,12 @@ impl UnitObj for MountUnit {
 
     fn dump(&self) {}
 
-    fn start(&self) -> libutils::Result<(), process1::manager::UnitActionError> {
+    fn start(&self) -> libutils::Result<(), libsysmaster::manager::UnitActionError> {
         self.mng.enter_mounted(true);
         Ok(())
     }
 
-    fn stop(&self, _force: bool) -> libutils::Result<(), process1::manager::UnitActionError> {
+    fn stop(&self, _force: bool) -> libutils::Result<(), libsysmaster::manager::UnitActionError> {
         self.mng.enter_dead(true);
         Ok(())
     }
@@ -115,5 +115,5 @@ impl Default for MountUnit {
     }
 }
 
-use process1::declure_unitobj_plugin;
+use libsysmaster::declure_unitobj_plugin;
 declure_unitobj_plugin!(MountUnit, MountUnit::default, PLUGIN_NAME, LOG_LEVEL);

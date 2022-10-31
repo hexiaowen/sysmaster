@@ -1,12 +1,12 @@
 //!
 
 use clap::Parser;
-use libutils::Error;
-use libutils::Result;
-use process1::proto::{
+use libsysmaster::proto::{
     abi::{sys_comm, unit_comm, CommandRequest},
     ProstClientStream,
 };
+use libutils::Error;
+use libutils::Result;
 use std::net::{SocketAddr, TcpStream};
 
 /// parse program arguments

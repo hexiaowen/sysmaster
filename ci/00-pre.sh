@@ -38,9 +38,9 @@ EOF
 rm -rf  ~/.cargo/.package-cache
 
 ##拉取代码
-#rm -rf process1
-#git clone https://gitee.com/openeuler/process1.git
-#cd process1
+#rm -rf sysmaster
+#git clone https://gitee.com/openeuler/sysmaster.git
+#cd sysmaster
 #git checkout -b pr_$prid
 #git fetch origin pull/$prid/head:master-$prid
 #git merge --no-edit master-$prid
