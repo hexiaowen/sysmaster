@@ -17,9 +17,9 @@
 //! # use std::thread;
 //! # use std::time::Duration;
 //! #
-//! # use event::Events;
-//! # use event::Source;
-//! # use event::{EventState, EventType};
+//! # use libevent::Events;
+//! # use libevent::Source;
+//! # use libevent::{EventState, EventType};
 //! #
 //! /// 定义一个类型, implement Source trait
 //! #[derive(Debug)]

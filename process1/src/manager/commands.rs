@@ -2,7 +2,7 @@ use super::manager::Manager;
 use super::rentry::ReliLastFrame;
 use crate::proto::ProstServerStream;
 use crate::reliability::Reliability;
-use event::{EventType, Events, Source};
+use libevent::{EventType, Events, Source};
 use std::net::{SocketAddr, TcpListener};
 use std::os::unix::io::RawFd;
 use std::{os::unix::prelude::AsRawFd, rc::Rc};

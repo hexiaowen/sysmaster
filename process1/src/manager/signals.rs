@@ -1,7 +1,7 @@
 use super::manager::Manager;
 use super::rentry::ReliLastFrame;
 use crate::reliability::Reliability;
-use event::{EventType, Events, Source};
+use libevent::{EventType, Events, Source};
 use nix::sys::signal::Signal;
 use std::{convert::TryFrom, rc::Rc};
 use utils::Result;

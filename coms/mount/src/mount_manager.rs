@@ -1,7 +1,7 @@
 use super::mount_base::{LOG_LEVEL, PLUGIN_NAME};
 use super::mount_comm::MountUmComm;
 use super::mount_rentry::{MountRe, MountReFrame};
-use event::{EventState, EventType, Events, Source};
+use libevent::{EventState, EventType, Events, Source};
 use libmount::mountinfo;
 use process1::manager::{
     ReliLastFrame, UnitActiveState, UnitManager, UnitManagerObj, UnitMngUtil, UnitType,

@@ -4,8 +4,8 @@ use super::unit_entry::UnitX;
 use super::unit_rentry::UnitRe;
 use crate::manager::rentry::ReliLastFrame;
 use crate::reliability::{ReStation, Reliability};
-use event::{EventState, EventType, Events, Source};
 use libc;
+use libevent::{EventState, EventType, Events, Source};
 use nix::cmsg_space;
 use nix::errno::Errno;
 use nix::sys::socket::{

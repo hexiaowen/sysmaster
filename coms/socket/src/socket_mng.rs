@@ -9,8 +9,8 @@ use super::{
     socket_rentry::{SocketCommand, SocketRe, SocketReFrame, SocketResult, SocketState},
     socket_spawn::SocketSpawn,
 };
-use event::EventState;
-use event::{EventType, Events, Source};
+use libevent::EventState;
+use libevent::{EventType, Events, Source};
 use nix::errno::Errno;
 use nix::libc::{self};
 use nix::{sys::signal::Signal, unistd::Pid};

@@ -5,7 +5,7 @@ use super::service_rentry::{
     NotifyState, ServiceCommand, ServiceResult, ServiceState, ServiceType,
 };
 use super::service_spawn::ServiceSpawn;
-use event::{EventState, EventType, Events, Source};
+use libevent::{EventState, EventType, Events, Source};
 use nix::errno::Errno;
 use nix::libc;
 use nix::sys::inotify::{AddWatchFlags, InitFlags, Inotify, WatchDescriptor};

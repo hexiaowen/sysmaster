@@ -10,9 +10,9 @@ mod test {
     use std::thread;
     use std::time::Duration;
 
-    use event::Events;
-    use event::Source;
-    use event::{EventState, EventType};
+    use libevent::Events;
+    use libevent::Source;
+    use libevent::{EventState, EventType};
 
     #[derive(Debug)]
     struct Io {

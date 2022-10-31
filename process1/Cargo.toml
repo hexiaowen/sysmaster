@@ -13,12 +13,14 @@ path = "src/lib.rs"
 name = "process1"
 
 [dependencies]
+utils = { path = "../libutils" }
+libevent = { path = "../libs/libevent" }
+cgroup = { path = "../libcgroup" }
+
 dynamic_reload = "0.8.0"
 walkdir = "2"
 siphasher = { version = "0.3", features = ["serde"] }
-utils = { path = "../libutils" }
-event = { path = "../libevent" }
-cgroup = { path = "../libcgroup" }
+
 strum = { version = "0.23", features = ["derive"] }
 nix = "0.24"
 log = "0.4"

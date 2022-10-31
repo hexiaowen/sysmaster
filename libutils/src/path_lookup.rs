@@ -1,3 +1,4 @@
+//! path look up lib
 use std::env;
 
 const ETC_SYSTEM_PATH: &str = "/etc/process1";

@@ -1,4 +1,4 @@
-use event::EventState;
+use libevent::EventState;
 // These tests cannot run as a regular test because cargo would spawn a thread to run it,
 // failing the signal masking. So we make our own, non-threaded harnessing
 use nix::unistd::fork;
@@ -8,9 +8,9 @@ use utils::Result;
 
 use std::rc::Rc;
 
-use event::EventType;
-use event::Events;
-use event::Source;
+use libevent::EventType;
+use libevent::Events;
+use libevent::Source;
 
 #[derive(Debug)]
 struct Signals {}

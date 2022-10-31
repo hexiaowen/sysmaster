@@ -14,7 +14,7 @@ use crate::manager::unit::data::{DataManager, UnitState};
 use crate::manager::{MngErrno, UnitRelations};
 use crate::plugin::Plugin;
 use crate::reliability::{ReStation, ReStationKind, Reliability};
-use event::Events;
+use libevent::Events;
 use nix::unistd::Pid;
 use std::convert::TryFrom;
 use std::path::{Path, PathBuf};
@@ -979,7 +979,7 @@ mod tests {
     use crate::manager::rentry::RELI_HISTORY_MAX_DBS;
     use crate::manager::unit::data::UnitActiveState;
     use crate::mount::mount_setup;
-    use event::Events;
+    use libevent::Events;
     use nix::errno::Errno;
     use nix::sys::signal::Signal;
     use std::thread;

@@ -2,7 +2,7 @@ use super::job::JobManager;
 use super::unit_datastore::UnitDb;
 use crate::manager::rentry::ReliLastFrame;
 use crate::reliability::{ReStation, Reliability};
-use event::{EventState, EventType, Events, Source};
+use libevent::{EventState, EventType, Events, Source};
 use nix::errno::Errno;
 use nix::sys::signal::Signal;
 use nix::sys::wait::{self, Id, WaitPidFlag, WaitStatus};

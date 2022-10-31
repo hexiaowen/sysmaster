@@ -17,7 +17,7 @@ use crate::manager::unit::unit_datastore::UnitDb;
 use crate::manager::unit::unit_entry::UnitX;
 use crate::manager::unit::unit_rentry::JobMode;
 use crate::reliability::{ReStation, Reliability};
-use event::{EventState, EventType, Events, Source};
+use libevent::{EventState, EventType, Events, Source};
 use std::cell::RefCell;
 use std::rc::Rc;
 use utils::{Error, Result};

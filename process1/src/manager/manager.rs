@@ -5,7 +5,7 @@ use super::signals::Signals;
 use super::unit::UnitManagerX;
 use super::MngErrno;
 use crate::reliability::Reliability;
-use event::{EventState, Events};
+use libevent::{EventState, Events};
 use nix::sys::reboot::{self, RebootMode};
 use nix::sys::signal::Signal;
 use std::cell::RefCell;
