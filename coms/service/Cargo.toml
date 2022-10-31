@@ -11,7 +11,7 @@ name = "service"
 
 [dependencies]
 utils = { path = "../../libutils" }
-cgroup = { path = "../../libcgroup" }
+libcgroup = { path = "../../libs/libcgroup" }
 process1 = { path = "../../process1" }
 libevent = { path = "../../libs/libevent" }
 libwatchdog = { path = "../../libs/libwatchdog" }

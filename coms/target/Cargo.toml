@@ -12,7 +12,7 @@ name = "target"
 
 [dependencies]
 utils = { path = "../../libutils" }
-cgroup = { path = "../../libcgroup" }
+libcgroup = { path = "../../libs/libcgroup" }
 process1 = { path = "../../process1" }
 
 dynamic_reload = "0.8.0"

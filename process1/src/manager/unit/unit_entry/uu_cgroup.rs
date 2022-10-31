@@ -1,6 +1,6 @@
 use super::uu_base::UeBase;
 use crate::reliability::ReStation;
-use cgroup;
+use libcgroup;
 use nix::NixPath;
 use std::rc::Rc;
 use std::{cell::RefCell, path::PathBuf};
@@ -82,14 +82,14 @@ impl UnitCgroupData {
     }
 
     fn set_default_cg_path(&mut self) {
-        let cg_tree_name = PathBuf::from(cgroup::cg_escape(self.base.id()));
+        let cg_tree_name = PathBuf::from(libcgroup::cg_escape(self.base.id()));
 
         self.cg_path = cg_tree_name;
     }
 
     pub(self) fn prepare_cg_exec(&mut self) -> Result<()> {
         log::debug!("cgroup: prepare cg exec");
-        cgroup::cg_create(&self.cg_path).map_err(|_e| Error::Other {
+        libcgroup::cg_create(&self.cg_path).map_err(|_e| Error::Other {
             msg: "prepare cgroup failed",
         })?;
 

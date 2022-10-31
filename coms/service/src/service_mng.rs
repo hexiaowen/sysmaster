@@ -784,7 +784,7 @@ impl ServiceMng {
     }
 
     fn cgroup_good(&self) -> bool {
-        if let Ok(v) = cgroup::cg_is_empty_recursive(&self.comm.unit().cg_path()) {
+        if let Ok(v) = libcgroup::cg_is_empty_recursive(&self.comm.unit().cg_path()) {
             return !v;
         }
 

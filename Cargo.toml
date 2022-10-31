@@ -35,7 +35,7 @@ path = "src/rc-local-generator/main.rs"
 
 [dependencies]
 # internal libraries
-cgroup = { path = "libcgroup" }
+libcgroup = { path = "libs/libcgroup" }
 libevent = { path = "libs/libevent" }
 process1 = { path = "process1"}
 utils = { path = "libutils" }
@@ -79,9 +79,9 @@ panic = 'abort'
 
 [workspace]
 members = [
-  "libcgroup",
-  "libs/libevent",
   "process1",
+  "libs/libcgroup",
+  "libs/libevent",
   "libutils",
   "libs/libtests",
   "libs/libwatchdog",

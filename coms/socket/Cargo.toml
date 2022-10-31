@@ -11,7 +11,7 @@ name = "socket"
 
 [dependencies]
 utils = { path = "../../libutils" }
-cgroup = { path = "../../libcgroup" }
+libcgroup = { path = "../../libs/libcgroup" }
 libevent = { path = "../../libs/libevent" }
 process1 = { path = "../../process1" }
 

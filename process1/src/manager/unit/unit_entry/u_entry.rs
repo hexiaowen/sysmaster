@@ -13,7 +13,7 @@ use crate::manager::unit::unit_base::{KillOperation, UnitActionError};
 use crate::manager::unit::unit_rentry::{UnitLoadState, UnitRe, UnitType};
 use crate::manager::{UnitNotifyFlags, UnitRelations};
 use crate::reliability::ReStation;
-use cgroup::{self, CgFlags};
+use libcgroup::{self, CgFlags};
 use log;
 use nix::sys::signal::Signal;
 use nix::sys::socket::UnixCredentials;
@@ -339,7 +339,7 @@ impl Unit {
         if !self.cgroup.cg_path().is_empty() {
             let pids = self.pids_set(m_pid, c_pid);
 
-            match cgroup::cg_kill_recursive(
+            match libcgroup::cg_kill_recursive(
                 &self.cg_path(),
                 sig,
                 CgFlags::IGNORE_SELF | CgFlags::SIGCONT,

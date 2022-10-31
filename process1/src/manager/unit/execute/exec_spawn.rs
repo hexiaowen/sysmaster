@@ -2,7 +2,7 @@ use super::exec_base::{ExecCmdError, ExecParameters};
 use super::ExecContext;
 use crate::manager::unit::unit_entry::Unit;
 use crate::manager::unit::unit_rentry::ExecCommand;
-use cgroup;
+use libcgroup;
 use log;
 use nix::fcntl::FcntlArg;
 use nix::unistd::{self, ForkResult, Pid};
@@ -36,7 +36,7 @@ impl ExecSpawn {
         match ret {
             Ok(ForkResult::Parent { child }) => {
                 log::debug!("child pid is :{}", child);
-                cgroup::cg_attach(child, &unit.cg_path())
+                libcgroup::cg_attach(child, &unit.cg_path())
                     .map_err(|e| ExecCmdError::CgroupError(e.to_string()))?;
                 Ok(child)
             }

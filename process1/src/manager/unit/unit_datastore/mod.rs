@@ -4,7 +4,7 @@ use crate::manager::unit::unit_entry::UnitX;
 use crate::manager::unit::unit_rentry::{UnitRe, UnitRelations, UnitType};
 use crate::manager::unit::UnitErrno;
 use crate::reliability::ReStation;
-use cgroup;
+use libcgroup;
 use nix::unistd::Pid;
 use nix::NixPath;
 use std::rc::Rc;
@@ -141,7 +141,7 @@ impl UnitDb {
             return;
         }
 
-        let pids = cgroup::cg_get_pids(&cg_path);
+        let pids = libcgroup::cg_get_pids(&cg_path);
         for pid in pids {
             log::debug!("watch all cgroup pids: {}", pid);
             self.child.add_watch_pid(id, pid)

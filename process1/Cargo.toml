@@ -15,7 +15,7 @@ name = "process1"
 [dependencies]
 utils = { path = "../libutils" }
 libevent = { path = "../libs/libevent" }
-cgroup = { path = "../libcgroup" }
+libcgroup = { path = "../libs/libcgroup" }
 
 dynamic_reload = "0.8.0"
 walkdir = "2"

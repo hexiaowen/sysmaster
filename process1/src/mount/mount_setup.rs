@@ -11,7 +11,7 @@ use nix::{
 use std::{collections::HashMap, error::Error, fs, path::Path};
 use utils::{fs_util, mount_util, path_util, proc_cmdline};
 
-use cgroup::{self, CgType};
+use libcgroup::{self, CgType};
 
 const EARLY_MOUNT_NUM: u8 = 4;
 const CGROUP_ROOT: &str = "/sys/fs/cgroup/";
@@ -291,7 +291,7 @@ pub fn mount_cgroup_controllers() -> Result<(), Box<dyn Error>> {
         return Ok(());
     }
 
-    let mut controllers = cgroup::cg_controllers()?;
+    let mut controllers = libcgroup::cg_controllers()?;
     let mut index = 0_usize;
 
     while index < controllers.len() {
@@ -382,7 +382,7 @@ fn symlink_controller(source: String, alias: String) -> Result<(), Errno> {
 }
 
 fn cg_unified_wanted() -> bool {
-    let cg_ver = cgroup::cg_type();
+    let cg_ver = libcgroup::cg_type();
 
     if let Ok(v) = cg_ver {
         return v == CgType::UnifiedV2;
@@ -404,7 +404,7 @@ fn cg_unified_wanted() -> bool {
 }
 
 fn cg_legacy_wanted() -> bool {
-    let cg_ver = cgroup::cg_type();
+    let cg_ver = libcgroup::cg_type();
 
     if let Ok(v) = cg_ver {
         return v != CgType::UnifiedV2;
@@ -414,7 +414,7 @@ fn cg_legacy_wanted() -> bool {
 }
 
 fn cg_unifiedv1_wanted() -> bool {
-    let cg_ver = cgroup::cg_type();
+    let cg_ver = libcgroup::cg_type();
 
     if let Ok(v) = cg_ver {
         return v != CgType::UnifiedV2;
