@@ -1,9 +1,9 @@
 use libc::{epoll_event, EPOLL_CLOEXEC, EPOLL_CTL_ADD, EPOLL_CTL_DEL, EPOLL_CTL_MOD};
+use libutils::syscall;
+use libutils::Result;
 use std::os::unix::io::{AsRawFd, RawFd};
 use std::ptr;
 use std::sync::atomic::{AtomicUsize, Ordering};
-use utils::syscall;
-use utils::Result;
 
 const LOWEST_FD: libc::c_int = 3;
 

@@ -10,7 +10,7 @@ crate-type = ["dylib"]
 name = "service"
 
 [dependencies]
-utils = { path = "../../libutils" }
+libutils = { path = "../../libs/libutils" }
 libcgroup = { path = "../../libs/libcgroup" }
 process1 = { path = "../../process1" }
 libevent = { path = "../../libs/libevent" }

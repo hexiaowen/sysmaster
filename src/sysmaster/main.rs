@@ -1,6 +1,7 @@
 //!
 
 use libc::c_int;
+use libutils::logger::{self};
 use log::{self};
 use nix::sys::signal::{self, SaFlags, SigAction, SigHandler, SigSet, Signal};
 use nix::unistd::{self};
@@ -11,7 +12,6 @@ use std::convert::TryFrom;
 use std::env::{self};
 use std::error::Error;
 use std::ffi::CString;
-use utils::logger::{self};
 
 fn main() -> Result<(), Box<dyn Error>> {
     logger::init_log_with_console("process1", 4);

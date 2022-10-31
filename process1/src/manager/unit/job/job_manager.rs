@@ -18,9 +18,9 @@ use crate::manager::unit::unit_entry::UnitX;
 use crate::manager::unit::unit_rentry::JobMode;
 use crate::reliability::{ReStation, Reliability};
 use libevent::{EventState, EventType, Events, Source};
+use libutils::{Error, Result};
 use std::cell::RefCell;
 use std::rc::Rc;
-use utils::{Error, Result};
 
 #[derive(Debug)]
 pub(in crate::manager::unit) struct JobAffect {
@@ -508,7 +508,7 @@ impl JobManagerData {
         }
 
         if !self.jobs.is_suspend(id) {
-            return Err(JobErrno::Internel);
+            return Err(JobErrno::Internal);
         }
 
         // remove it from outside(command) directly
@@ -809,7 +809,7 @@ mod tests {
     use crate::manager::unit::uload_util::UnitFile;
     use crate::manager::unit::unit_rentry::{UnitRe, UnitRelations, UnitType};
     use crate::plugin::Plugin;
-    use utils::logger;
+    use libutils::logger;
 
     //#[test]
     fn job_reli() {
@@ -1088,9 +1088,9 @@ mod tests {
 
         // nothing exists
         let ret = jm.has_stop_job(&unit_test1);
-        assert_eq!(ret, false);
+        assert!(!ret);
         let ret = jm.has_stop_job(&unit_test2);
-        assert_eq!(ret, false);
+        assert!(!ret);
 
         // something(non-stop) exists
         let conf = JobConf::new(Rc::clone(&unit_test1), JobKind::Start);
@@ -1098,7 +1098,7 @@ mod tests {
         assert!(ret.is_ok());
         assert_eq!(jm.data.jobs.len(), 1);
         let ret = jm.has_stop_job(&unit_test1);
-        assert_eq!(ret, false);
+        assert!(!ret);
 
         // something(stop) exists
         let conf = JobConf::new(Rc::clone(&unit_test1), JobKind::Stop);
@@ -1106,7 +1106,7 @@ mod tests {
         assert!(ret.is_ok());
         assert_eq!(jm.data.jobs.len(), 1);
         let ret = jm.has_stop_job(&unit_test1);
-        assert_eq!(ret, true);
+        assert!(ret);
     }
 
     #[test]
@@ -1148,8 +1148,8 @@ mod tests {
         let unit_test1 = create_unit(&dm, &reli, &rentry, &name_test1);
         let name_test2 = String::from("test2.service");
         let unit_test2 = create_unit(&dm, &reli, &rentry, &name_test2);
-        db.units_insert(name_test1.clone(), Rc::clone(&unit_test1));
-        db.units_insert(name_test2.clone(), Rc::clone(&unit_test2));
+        db.units_insert(name_test1, Rc::clone(&unit_test1));
+        db.units_insert(name_test2, Rc::clone(&unit_test2));
         if let Some(r) = relation {
             let u1 = Rc::clone(&unit_test1);
             let u2 = Rc::clone(&unit_test2);

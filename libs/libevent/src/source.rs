@@ -1,5 +1,5 @@
 //! # Events must implement the Source trait
-use utils::Result;
+use libutils::Result;
 
 use crate::EventType;
 use crate::Events;

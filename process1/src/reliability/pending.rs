@@ -1,12 +1,12 @@
 use heed::types::{OwnedType, SerdeBincode};
 use heed::{Database, Env, EnvOpenOptions};
+use libutils::fd_util;
 use nix::errno::Errno;
 use serde::{Deserialize, Serialize};
 use std::fmt;
 use std::fs;
 use std::io::Error;
 use std::path::Path;
-use utils::fd_util;
 
 const RELI_PENDING_DIR: &str = "pending.mdb";
 const RELI_PENDING_MAX_DBS: u32 = 1;

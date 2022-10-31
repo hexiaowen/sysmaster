@@ -1,12 +1,12 @@
 #[cfg(test)]
 mod test {
+    use libutils::Error;
     use nix::sys::inotify::AddWatchFlags;
     use std::fs::File;
     use std::os::unix::prelude::RawFd;
     use std::path::Path;
     use std::rc::Rc;
     use std::thread;
-    use utils::Error;
 
     use libevent::Events;
     use libevent::Source;

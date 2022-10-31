@@ -9,5 +9,5 @@ edition = "2018"
 [dependencies]
 libc = { version = "0.2" }
 nix = { version = "0.24" }
-utils = { path = "../../libutils" }
+libutils = { path = "../libutils" }
 log = "0.4"

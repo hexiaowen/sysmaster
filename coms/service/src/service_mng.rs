@@ -6,6 +6,8 @@ use super::service_rentry::{
 };
 use super::service_spawn::ServiceSpawn;
 use libevent::{EventState, EventType, Events, Source};
+use libutils::{fd_util, Error, IN_SET};
+use libutils::{file_util, process_util};
 use nix::errno::Errno;
 use nix::libc;
 use nix::sys::inotify::{AddWatchFlags, InitFlags, Inotify, WatchDescriptor};
@@ -28,8 +30,6 @@ use std::{
     path::PathBuf,
     rc::Weak,
 };
-use utils::{fd_util, Error, IN_SET};
-use utils::{file_util, process_util};
 
 pub(super) struct ServiceMng {
     // associated objects

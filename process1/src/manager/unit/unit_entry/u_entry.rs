@@ -14,6 +14,8 @@ use crate::manager::unit::unit_rentry::{UnitLoadState, UnitRe, UnitType};
 use crate::manager::{UnitNotifyFlags, UnitRelations};
 use crate::reliability::ReStation;
 use libcgroup::{self, CgFlags};
+use libutils::error::Error as ServiceError;
+use libutils::Result;
 use log;
 use nix::sys::signal::Signal;
 use nix::sys::socket::UnixCredentials;
@@ -25,8 +27,6 @@ use std::error::Error;
 use std::hash::{Hash, Hasher};
 use std::path::PathBuf;
 use std::rc::Rc;
-use utils::error::Error as ServiceError;
-use utils::Result;
 
 ///
 pub struct Unit {
@@ -575,8 +575,8 @@ mod tests {
         manager::{unit::data::DataManager, unit::uload_util::UnitFile},
         plugin::Plugin,
     };
+    use libutils::logger;
     use std::rc::Rc;
-    use utils::logger;
 
     fn unit_init() -> Rc<Unit> {
         logger::init_log_with_console("test_unit_entry", 4);

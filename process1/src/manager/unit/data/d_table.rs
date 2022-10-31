@@ -101,8 +101,7 @@ mod tests {
         assert!(old.is_none());
 
         let mut ud_config = UnitDepConf::new();
-        let mut vec = Vec::new();
-        vec.push(String::from("name"));
+        let vec = vec!["name".to_string()];
         ud_config.deps.insert(UnitRelations::UnitAfter, vec);
         let old = dm.insert_ud_config(String::from("test"), ud_config);
         assert_eq!(old.unwrap().deps.len(), 0);
@@ -112,8 +111,7 @@ mod tests {
         assert!(old.is_none());
 
         let mut ud_config = UnitDepConf::new();
-        let mut vec = Vec::new();
-        vec.push(String::from("name"));
+        let vec = vec!["name".to_string()];
         ud_config.deps.insert(UnitRelations::UnitAfter, vec);
         dm.insert_ud_config(String::from("test"), ud_config);
         assert_eq!(udc_sub.len(), 1);

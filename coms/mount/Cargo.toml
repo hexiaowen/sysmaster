@@ -11,7 +11,7 @@ name = "mount"
 
 [dependencies]
 libevent = { path = "../../libs/libevent" }
-utils = { path = "../../libutils" }
+libutils = { path = "../../libs/libutils" }
 process1 = { path = "../../process1" }
 
 dynamic_reload = "0.8.0"

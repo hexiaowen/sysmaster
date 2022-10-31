@@ -360,7 +360,7 @@ mod tests {
     use crate::manager::unit::uload_util::UnitFile;
     use crate::manager::unit::unit_rentry::UnitRe;
     use crate::plugin::Plugin;
-    use utils::logger;
+    use libutils::logger;
 
     #[test]
     fn rt_push_load_queue() {

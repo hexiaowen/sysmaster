@@ -798,7 +798,7 @@ mod tests {
     use crate::manager::unit::unit_rentry::{JobMode, UnitRe, UnitType};
     use crate::plugin::Plugin;
     use crate::reliability::Reliability;
-    use utils::logger;
+    use libutils::logger;
 
     #[test]
     fn juv_api_len() {
@@ -905,28 +905,28 @@ mod tests {
         let other = JobUnit::new(Rc::clone(&unit_test1));
 
         // nothing vs nothing
-        assert_eq!(uv.is_suspends_replace_with(&other), true);
+        assert!(uv.is_suspends_replace_with(&other));
 
         // stop vs nothing
         uv.insert_suspend(Rc::clone(&uv_stop));
-        assert_eq!(uv.is_suspends_replace_with(&other), true);
+        assert!(uv.is_suspends_replace_with(&other));
 
         // stop vs stop
         other.insert_suspend(Rc::clone(&o_stop));
-        assert_eq!(uv.is_suspends_replace_with(&other), true);
+        assert!(uv.is_suspends_replace_with(&other));
 
         // non-stop vs stop
         let uv = JobUnit::new(Rc::clone(&unit_test1));
         uv.insert_suspend(Rc::clone(&uv_start));
-        assert_eq!(uv.is_suspends_replace_with(&other), true);
+        assert!(uv.is_suspends_replace_with(&other));
 
         // non-stop vs nothing
         let other = JobUnit::new(Rc::clone(&unit_test1));
-        assert_eq!(uv.is_suspends_replace_with(&other), true);
+        assert!(uv.is_suspends_replace_with(&other));
 
         // non-stop vs non-stop
         other.insert_suspend(Rc::clone(&o_start));
-        assert_eq!(uv.is_suspends_replace_with(&other), true);
+        assert!(uv.is_suspends_replace_with(&other));
     }
 
     #[test]
@@ -940,28 +940,28 @@ mod tests {
         let other = JobUnit::new(Rc::clone(&unit_test1));
 
         // nothing vs nothing
-        assert_eq!(uv.is_suspends_replace_with(&other), true);
+        assert!(uv.is_suspends_replace_with(&other));
 
         // stop vs nothing
         uv.insert_suspend(Rc::clone(&uv_stop));
-        assert_eq!(uv.is_suspends_replace_with(&other), true);
+        assert!(uv.is_suspends_replace_with(&other));
 
         // stop vs stop
         other.insert_suspend(Rc::clone(&o_stop));
-        assert_eq!(uv.is_suspends_replace_with(&other), true);
+        assert!(uv.is_suspends_replace_with(&other));
 
         // non-stop vs stop
         let uv = JobUnit::new(Rc::clone(&unit_test1));
         uv.insert_suspend(Rc::clone(&uv_start));
-        assert_eq!(uv.is_suspends_replace_with(&other), false);
+        assert!(!uv.is_suspends_replace_with(&other));
 
         // non-stop vs nothing
         let other = JobUnit::new(Rc::clone(&unit_test1));
-        assert_eq!(uv.is_suspends_replace_with(&other), true);
+        assert!(uv.is_suspends_replace_with(&other));
 
         // non-stop vs non-stop
         other.insert_suspend(Rc::clone(&o_start));
-        assert_eq!(uv.is_suspends_replace_with(&other), true);
+        assert!(uv.is_suspends_replace_with(&other));
     }
 
     #[test]
@@ -985,23 +985,23 @@ mod tests {
         other.insert_suspend(Rc::clone(&o_nop));
         o_nop.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
 
         /* nop vs start */
         other.insert_suspend(Rc::clone(&o_start));
         o_start.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
 
         /* nop vs stop */
         let other = JobUnit::new(Rc::clone(&unit_test1));
         other.insert_suspend(Rc::clone(&o_stop));
         o_stop.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
 
         // start
         let (o_nop, o_start, _, _, o_stop) = prepare_jobs(&reli, &unit_test1, mode);
@@ -1015,23 +1015,23 @@ mod tests {
         other.insert_suspend(Rc::clone(&o_nop));
         o_nop.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
 
         /* start vs start */
         other.insert_suspend(Rc::clone(&o_start));
         o_start.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), false);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(!uv.is_next_trigger_order_with(&other, after));
 
         /* start vs stop */
         let other = JobUnit::new(Rc::clone(&unit_test1));
         other.insert_suspend(Rc::clone(&o_stop));
         o_stop.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), false);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), false);
+        assert!(!uv.is_next_trigger_order_with(&other, before));
+        assert!(!uv.is_next_trigger_order_with(&other, after));
 
         // stop
         let (o_nop, o_start, _, _, o_stop) = prepare_jobs(&reli, &unit_test1, mode);
@@ -1045,23 +1045,23 @@ mod tests {
         other.insert_suspend(Rc::clone(&o_nop));
         o_nop.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
 
         /* stop vs start */
         other.insert_suspend(Rc::clone(&o_start));
         o_start.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
 
         /* stop vs stop */
         let other = JobUnit::new(Rc::clone(&unit_test1));
         other.insert_suspend(Rc::clone(&o_stop));
         o_stop.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), false);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(!uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
     }
 
     #[test]
@@ -1085,23 +1085,23 @@ mod tests {
         other.insert_suspend(Rc::clone(&o_nop));
         o_nop.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
 
         /* nop vs start */
         other.insert_suspend(Rc::clone(&o_start));
         o_start.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
 
         /* nop vs stop */
         let other = JobUnit::new(Rc::clone(&unit_test1));
         other.insert_suspend(Rc::clone(&o_stop));
         o_stop.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
 
         // start
         let (o_nop, o_start, _, _, o_stop) = prepare_jobs(&reli, &unit_test1, mode);
@@ -1115,23 +1115,23 @@ mod tests {
         other.insert_suspend(Rc::clone(&o_nop));
         o_nop.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
 
         /* start vs start */
         other.insert_suspend(Rc::clone(&o_start));
         o_start.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
 
         /* start vs stop */
         let other = JobUnit::new(Rc::clone(&unit_test1));
         other.insert_suspend(Rc::clone(&o_stop));
         o_stop.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
 
         let (o_nop, o_start, _, _, o_stop) = prepare_jobs(&reli, &unit_test1, mode);
 
@@ -1144,23 +1144,23 @@ mod tests {
         other.insert_suspend(Rc::clone(&o_nop));
         o_nop.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
 
         /* stop vs start */
         other.insert_suspend(Rc::clone(&o_start));
         o_start.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
 
         /* stop vs stop */
         let other = JobUnit::new(Rc::clone(&unit_test1));
         other.insert_suspend(Rc::clone(&o_stop));
         o_stop.wait();
         other.reshuffle();
-        assert_eq!(uv.is_next_trigger_order_with(&other, before), true);
-        assert_eq!(uv.is_next_trigger_order_with(&other, after), true);
+        assert!(uv.is_next_trigger_order_with(&other, before));
+        assert!(uv.is_next_trigger_order_with(&other, after));
     }
 
     #[test]
@@ -1259,8 +1259,7 @@ mod tests {
         let dm = Rc::new(DataManager::new());
         let rentry = Rc::new(UnitRe::new(relir));
         let name_test1 = String::from("test1.service");
-        let unit_test1 = create_unit(&dm, relir, &rentry, &name_test1);
-        unit_test1
+        create_unit(&dm, relir, &rentry, &name_test1)
     }
 
     fn create_unit(

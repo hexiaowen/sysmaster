@@ -26,7 +26,7 @@ pub enum UnitErrno {
     ///
     UnitErrNotExisted,
     ///
-    UnitErrInternel,
+    UnitErrInternal,
     ///
     UnitErrNotSupported,
 }

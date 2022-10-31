@@ -2,10 +2,10 @@
 //!
 use super::target_comm::TargetUnitComm;
 use super::target_rentry::TargetState;
+use libutils::IN_SET;
 use process1::manager::{UnitActionError, UnitActiveState, UnitNotifyFlags};
 use process1::ReStation;
 use std::{cell::RefCell, rc::Rc};
-use utils::IN_SET;
 
 impl TargetState {
     fn to_unit_state(self) -> UnitActiveState {

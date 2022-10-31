@@ -135,7 +135,7 @@ mod tests {
     use crate::manager::unit::unit_rentry::{UnitRe, UnitType};
     use crate::plugin::Plugin;
     use crate::reliability::Reliability;
-    use utils::logger;
+    use libutils::logger;
 
     #[test]
     #[should_panic]

@@ -1,10 +1,10 @@
 use libevent::EventState;
 // These tests cannot run as a regular test because cargo would spawn a thread to run it,
 // failing the signal masking. So we make our own, non-threaded harnessing
+use libutils::Error;
+use libutils::Result;
 use nix::unistd::fork;
 use nix::unistd::ForkResult;
-use utils::Error;
-use utils::Result;
 
 use std::rc::Rc;
 

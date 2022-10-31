@@ -1,11 +1,11 @@
 #[cfg(test)]
 mod test {
+    use libutils::Error;
     use std::{
         net::{TcpListener, TcpStream},
         os::unix::io::{AsRawFd, RawFd},
         rc::Rc,
     };
-    use utils::Error;
 
     use std::thread;
     use std::time::Duration;

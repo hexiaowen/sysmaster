@@ -3,12 +3,12 @@ use super::unit_datastore::UnitDb;
 use crate::manager::rentry::ReliLastFrame;
 use crate::reliability::{ReStation, Reliability};
 use libevent::{EventState, EventType, Events, Source};
+use libutils::Result;
 use nix::errno::Errno;
 use nix::sys::signal::Signal;
 use nix::sys::wait::{self, Id, WaitPidFlag, WaitStatus};
 use std::cell::RefCell;
 use std::rc::{Rc, Weak};
-use utils::Result;
 
 pub(super) struct Sigchld {
     // associated objects

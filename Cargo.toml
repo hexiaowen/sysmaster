@@ -37,8 +37,8 @@ path = "src/rc-local-generator/main.rs"
 # internal libraries
 libcgroup = { path = "libs/libcgroup" }
 libevent = { path = "libs/libevent" }
+libutils = { path = "libs/libutils" }
 process1 = { path = "process1"}
-utils = { path = "libutils" }
 
 # third libraries
 bitflags = "1.3.2"
@@ -82,7 +82,7 @@ members = [
   "process1",
   "libs/libcgroup",
   "libs/libevent",
-  "libutils",
+  "libs/libutils",
   "libs/libtests",
   "libs/libwatchdog",
   "coms/service",

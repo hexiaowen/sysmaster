@@ -1,8 +1,8 @@
 //! # 一种对epoll接口的封装
 
 use libc::epoll_event;
+use libutils::Result;
 use std::os::unix::{io::AsRawFd, io::RawFd};
-use utils::Result;
 
 pub(crate) mod epoll;
 #[cfg(unix)]

@@ -5,6 +5,7 @@ use super::socket_comm::SocketUnitComm;
 use super::socket_rentry::{SectionSocket, SocketCommand};
 use crate::socket_base::{NetlinkProtocol, PortType};
 use confique::Config;
+use libutils::socket_util;
 use nix::errno::Errno;
 use nix::sys::socket::sockopt::ReuseAddr;
 use nix::sys::socket::{
@@ -20,7 +21,6 @@ use std::fs;
 use std::net::{Ipv4Addr, Ipv6Addr, SocketAddr, SocketAddrV4, SocketAddrV6};
 use std::path::PathBuf;
 use std::rc::Rc;
-use utils::socket_util;
 
 pub(super) enum ListeningItem {
     Stream,

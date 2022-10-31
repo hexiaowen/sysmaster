@@ -3,10 +3,10 @@ use super::rentry::ReliLastFrame;
 use crate::proto::ProstServerStream;
 use crate::reliability::Reliability;
 use libevent::{EventType, Events, Source};
+use libutils::{Error, Result};
 use std::net::{SocketAddr, TcpListener};
 use std::os::unix::io::RawFd;
 use std::{os::unix::prelude::AsRawFd, rc::Rc};
-use utils::{Error, Result};
 
 pub(super) struct Commands {
     // associated objects

@@ -252,7 +252,7 @@ impl Plugin {
                     let file_name = path.file_name();
                     let result = Self::load_plugin(self, file_name.unwrap(), &mut reload_handler);
                     if let Ok(_r) = result {
-                        log::info!("Plugin load unit plugin[{:?}] sucessful", file_name);
+                        log::info!("Plugin load unit plugin[{:?}] successful", file_name);
                     } else if let Err(_e) = result {
                         log::error!(
                             "Plugin load unit plugin[{:?}] failed, detail is {}",
@@ -466,7 +466,7 @@ impl Plugin {
 #[cfg(test)]
 mod tests {
 
-    use utils::logger;
+    use libutils::logger;
 
     use super::*;
     // use services::service::ServiceUnit;

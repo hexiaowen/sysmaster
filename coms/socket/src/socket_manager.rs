@@ -1,11 +1,11 @@
 use super::socket_base::{LOG_LEVEL, PLUGIN_NAME};
 use super::socket_comm::SocketUmComm;
 use super::socket_rentry::SocketReFrame;
+use libutils::logger;
 use process1::manager::{UnitManager, UnitManagerObj, UnitMngUtil};
 use process1::{ReStation, Reliability};
 use std::rc::Rc;
 use std::sync::Arc;
-use utils::logger;
 
 struct SocketManager {
     comm: Arc<SocketUmComm>,

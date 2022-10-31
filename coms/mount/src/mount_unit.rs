@@ -4,12 +4,12 @@
 use super::mount_base::{LOG_LEVEL, PLUGIN_NAME};
 use super::mount_comm::MountUnitComm;
 use super::mount_mng::MountMng;
+use libutils::logger;
 use nix::{sys::signal::Signal, unistd::Pid};
 use process1::manager::{UnitActiveState, UnitManager, UnitMngUtil, UnitObj, UnitSubClass};
 use process1::{ReStation, Reliability};
 use std::path::PathBuf;
 use std::rc::Rc;
-use utils::logger;
 
 struct MountUnit {
     comm: Rc<MountUnitComm>,
@@ -51,7 +51,7 @@ impl MountUnit {
 }
 
 impl UnitObj for MountUnit {
-    fn load(&self, _paths: Vec<PathBuf>) -> utils::Result<(), Box<dyn std::error::Error>> {
+    fn load(&self, _paths: Vec<PathBuf>) -> libutils::Result<(), Box<dyn std::error::Error>> {
         self.comm.unit().set_ignore_on_isolate(true);
 
         Ok(())
@@ -72,12 +72,12 @@ impl UnitObj for MountUnit {
 
     fn dump(&self) {}
 
-    fn start(&self) -> utils::Result<(), process1::manager::UnitActionError> {
+    fn start(&self) -> libutils::Result<(), process1::manager::UnitActionError> {
         self.mng.enter_mounted(true);
         Ok(())
     }
 
-    fn stop(&self, _force: bool) -> utils::Result<(), process1::manager::UnitActionError> {
+    fn stop(&self, _force: bool) -> libutils::Result<(), process1::manager::UnitActionError> {
         self.mng.enter_dead(true);
         Ok(())
     }

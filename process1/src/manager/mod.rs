@@ -16,8 +16,8 @@ pub enum MngErrno {
     Input,
     /// not existed
     NotExisted,
-    /// internel error
-    Internel,
+    /// Internal error
+    Internal,
     /// not supported
     NotSupported,
 }

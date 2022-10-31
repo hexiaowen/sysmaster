@@ -13,7 +13,7 @@ path = "src/lib.rs"
 name = "process1"
 
 [dependencies]
-utils = { path = "../libutils" }
+libutils = { path = "../libs/libutils" }
 libevent = { path = "../libs/libevent" }
 libcgroup = { path = "../libs/libcgroup" }
 

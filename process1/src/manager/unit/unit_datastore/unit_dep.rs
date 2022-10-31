@@ -361,7 +361,7 @@ mod tests {
     use crate::manager::unit::unit_rentry::UnitType;
     use crate::plugin::Plugin;
     use crate::reliability::Reliability;
-    use utils::logger;
+    use libutils::logger;
 
     #[test]
     fn dep_insert() {

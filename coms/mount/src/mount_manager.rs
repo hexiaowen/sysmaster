@@ -3,6 +3,8 @@ use super::mount_comm::MountUmComm;
 use super::mount_rentry::{MountRe, MountReFrame};
 use libevent::{EventState, EventType, Events, Source};
 use libmount::mountinfo;
+use libutils::logger;
+use libutils::{Error, Result};
 use process1::manager::{
     ReliLastFrame, UnitActiveState, UnitManager, UnitManagerObj, UnitMngUtil, UnitType,
 };
@@ -14,8 +16,6 @@ use std::io::Read;
 use std::os::unix::io::{AsRawFd, RawFd};
 use std::rc::Rc;
 use std::sync::Arc;
-use utils::logger;
-use utils::{Error, Result};
 
 struct MountManager {
     // owned objects

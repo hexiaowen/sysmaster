@@ -1,11 +1,11 @@
+use libutils::path_lookup::LookupPaths;
+use libutils::{path_lookup, time_util};
 use siphasher::sip::SipHasher24;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::fs;
 use std::hash::Hasher;
 use std::path::{Path, PathBuf};
-use utils::path_lookup::LookupPaths;
-use utils::{path_lookup, time_util};
 
 pub struct UnitFile {
     data: RefCell<UnitFileData>,

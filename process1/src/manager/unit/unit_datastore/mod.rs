@@ -5,13 +5,13 @@ use crate::manager::unit::unit_rentry::{UnitRe, UnitRelations, UnitType};
 use crate::manager::unit::UnitErrno;
 use crate::reliability::ReStation;
 use libcgroup;
+use libutils::Result;
 use nix::unistd::Pid;
 use nix::NixPath;
 use std::rc::Rc;
 use unit_child::UnitChild;
 use unit_dep::UnitDep;
 use unit_sets::UnitSets;
-use utils::Result;
 
 //#[derive(Debug)]
 pub(super) struct UnitDb {

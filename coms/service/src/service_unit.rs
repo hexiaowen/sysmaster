@@ -5,6 +5,8 @@ use super::service_mng::RunningData;
 use super::service_mng::ServiceMng;
 use super::service_monitor::ServiceMonitor;
 use super::service_rentry::{NotifyAccess, ServiceCommand, ServiceType};
+use libutils::error::Error as ServiceError;
+use libutils::logger;
 use nix::sys::signal::Signal;
 use nix::sys::socket::UnixCredentials;
 use nix::unistd::Pid;
@@ -17,8 +19,6 @@ use std::collections::HashMap;
 use std::error::Error;
 use std::path::PathBuf;
 use std::rc::Rc;
-use utils::error::Error as ServiceError;
-use utils::logger;
 
 struct ServiceUnit {
     comm: Rc<ServiceUnitComm>,

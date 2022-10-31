@@ -2,10 +2,10 @@
 use crate::timer::Timer;
 use crate::{EventState, EventType, Poll, Signals, Source};
 
+use libutils::Error;
+use libutils::Result;
 use nix::sys::inotify::{AddWatchFlags, InitFlags, Inotify, InotifyEvent, WatchDescriptor};
 use nix::NixPath;
-use utils::Error;
-use utils::Result;
 
 use std::cell::RefCell;
 use std::collections::{BinaryHeap, HashMap};

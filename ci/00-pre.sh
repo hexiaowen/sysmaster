@@ -8,7 +8,7 @@
 # do not use chinese in source code
 for rustlist in `git diff origin/master --stat | awk '{print $1}' | grep \.rs$ | tr '\n' ' '`
 do
-    grep -P '[\p{Han}]' $rustlist  && echo "DO NOT USE CHANESE CHARACTERS in code, 不要在源码中使用中文!" && exit 1
+    grep -Pn '[\p{Han}]' $rustlist  && echo "DO NOT USE CHANESE CHARACTERS in code, 不要在源码中使用中文!" && exit 1
 done
 
 # install needed tools

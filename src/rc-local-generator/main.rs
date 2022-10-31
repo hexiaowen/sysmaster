@@ -4,8 +4,8 @@
 //! and added to the end of the system startup process
 
 mod rc_local_generator;
+use libutils::logger;
 use rc_local_generator::*;
-use utils::logger;
 
 fn main() {
     logger::init_log_with_console("rc_local_generator", 4);

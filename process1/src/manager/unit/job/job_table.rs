@@ -96,7 +96,7 @@ impl JobTable {
         // check other-jobs-id first: make rollback simple
         for (o_id, _) in other.t_id.borrow().iter() {
             if self.t_id.borrow().get(o_id).is_some() {
-                return Err(JobErrno::Internel);
+                return Err(JobErrno::Internal);
             }
         }
 
@@ -415,7 +415,7 @@ impl JobTable {
         // check job-id
         let id = job.get_id();
         if self.t_id.borrow().get(&id).is_some() {
-            return Err(JobErrno::Internel);
+            return Err(JobErrno::Internal);
         }
 
         // table-unit
@@ -434,7 +434,7 @@ impl JobTable {
         // check job-id
         let id = job.get_id();
         if self.t_id.borrow().get(&id).is_some() {
-            return Err(JobErrno::Internel);
+            return Err(JobErrno::Internal);
         }
 
         // table-unit
@@ -971,7 +971,7 @@ mod tests {
     use crate::manager::unit::unit_rentry::{UnitRe, UnitType};
     use crate::plugin::Plugin;
     use crate::reliability::Reliability;
-    use utils::logger;
+    use libutils::logger;
 
     #[test]
     fn job_table_record_suspend() {
@@ -982,12 +982,12 @@ mod tests {
         let job_rentry = Rc::new(JobRe::new(&reli));
         let name_test1 = String::from("test1.service");
         let unit_test1 = create_unit(&dm, &reli, &rentry, &name_test1);
-        let mut ja = JobAlloc::new(&reli, &job_rentry);
+        let ja = JobAlloc::new(&reli, &job_rentry);
         let table = JobTable::new(&db);
 
         let conf = JobConf::new(Rc::clone(&unit_test1), JobKind::Nop);
-        let new = table.record_suspend(&mut ja, &conf, JobMode::Replace);
-        assert_eq!(new, true);
+        let new = table.record_suspend(&ja, &conf, JobMode::Replace);
+        assert!(new);
     }
 
     fn create_unit(

@@ -11,7 +11,7 @@ crate-type = ["dylib"]
 name = "target"
 
 [dependencies]
-utils = { path = "../../libutils" }
+libutils = { path = "../../libs/libutils" }
 libcgroup = { path = "../../libs/libcgroup" }
 process1 = { path = "../../process1" }
 

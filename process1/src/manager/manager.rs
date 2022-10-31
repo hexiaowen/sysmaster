@@ -6,13 +6,13 @@ use super::unit::UnitManagerX;
 use super::MngErrno;
 use crate::reliability::Reliability;
 use libevent::{EventState, Events};
+use libutils::process_util::{self};
+use libutils::Result;
 use nix::sys::reboot::{self, RebootMode};
 use nix::sys::signal::Signal;
 use std::cell::RefCell;
 use std::io::Error;
 use std::rc::Rc;
-use utils::process_util::{self};
-use utils::Result;
 
 /// maximal size of process's arguments
 pub const MANAGER_ARGS_SIZE_MAX: usize = 5; // 6 - 1
@@ -401,7 +401,7 @@ impl Manager {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use utils::logger;
+    use libutils::logger;
 
     //#[test]
     fn manager_api() {

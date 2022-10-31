@@ -6,7 +6,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-utils = { path = "../../libutils" }
+libutils = { path = "../libutils" }
 log = "0.4"
 nix = "0.24"
 errno = "*"

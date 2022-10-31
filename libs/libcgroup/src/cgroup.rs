@@ -18,7 +18,7 @@ use std::io::{Error as IOError, ErrorKind};
 use std::path::PathBuf;
 use walkdir::{DirEntry, WalkDir};
 
-use utils::IN_SET;
+use libutils::IN_SET;
 
 const CG_BASE_DIR: &str = "/sys/fs/cgroup";
 const CG_UNIFIED_DIR: &str = "/sys/fs/cgroup/unified";

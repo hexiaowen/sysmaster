@@ -1,5 +1,5 @@
+use libutils::condition::{Condition, ConditionType};
 use std::cell::RefCell;
-use utils::condition::{Condition, ConditionType};
 
 pub(super) const CONDITION_PATH_EXISTS: &str = "ConditionPathExists";
 pub(super) const CONDITION_FILE_NOT_EMPTY: &str = "ConditionFileNotEmpty";

@@ -12,7 +12,7 @@
 //! #     net::{TcpListener, TcpStream},
 //! #     os::unix::io::{AsRawFd, RawFd},
 //! #     rc::Rc};
-//! # use utils::Error;
+//! # use libutils::Error;
 //! #
 //! # use std::thread;
 //! # use std::time::Duration;

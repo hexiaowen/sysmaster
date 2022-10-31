@@ -1,10 +1,10 @@
 use super::service_base::{LOG_LEVEL, PLUGIN_NAME};
 use super::service_comm::ServiceUmComm;
+use libutils::logger;
 use process1::manager::{UnitManager, UnitManagerObj, UnitMngUtil};
 use process1::{ReStation, Reliability};
 use std::rc::Rc;
 use std::sync::Arc;
-use utils::logger;
 
 struct ServiceManager {
     comm: Arc<ServiceUmComm>,

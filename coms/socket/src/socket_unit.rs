@@ -10,6 +10,7 @@ use crate::{
     socket_load::SocketLoad,
     socket_mng::SocketMng,
 };
+use libutils::logger;
 use nix::{sys::signal::Signal, unistd::Pid};
 use process1::manager::{
     ExecContext, Unit, UnitActionError, UnitActiveState, UnitManager, UnitMngUtil, UnitObj,
@@ -17,7 +18,6 @@ use process1::manager::{
 };
 use process1::{ReStation, Reliability};
 use std::{error::Error, path::PathBuf, rc::Rc};
-use utils::logger;
 
 // the structuer of the socket unit type
 struct SocketUnit {

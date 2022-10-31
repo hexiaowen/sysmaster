@@ -11,6 +11,8 @@ use super::{
 };
 use libevent::EventState;
 use libevent::{EventType, Events, Source};
+use libutils::Error;
+use libutils::IN_SET;
 use nix::errno::Errno;
 use nix::libc::{self};
 use nix::{sys::signal::Signal, unistd::Pid};
@@ -22,8 +24,6 @@ use process1::{ReStation, Reliability};
 use std::cell::RefCell;
 use std::os::unix::prelude::RawFd;
 use std::rc::{Rc, Weak};
-use utils::Error;
-use utils::IN_SET;
 
 impl SocketState {
     pub(super) fn to_unit_active_state(self) -> UnitActiveState {

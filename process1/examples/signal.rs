@@ -2,7 +2,7 @@
 use process1::manager::{Action, ManagerX, Mode};
 use std::env;
 
-use utils::logger;
+use libutils::logger;
 
 fn main() {
     logger::init_log_with_console("test_unit_signal", 4);

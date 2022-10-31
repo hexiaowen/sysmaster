@@ -15,6 +15,8 @@ use crate::manager::{MngErrno, UnitRelations};
 use crate::plugin::Plugin;
 use crate::reliability::{ReStation, ReStationKind, Reliability};
 use libevent::Events;
+use libutils::process_util;
+use libutils::Result;
 use nix::unistd::Pid;
 use std::convert::TryFrom;
 use std::path::{Path, PathBuf};
@@ -22,8 +24,6 @@ use std::rc::Rc;
 use std::sync::Arc;
 use unit_load::UnitLoad;
 use unit_submanager::UnitSubManagers;
-use utils::process_util;
-use utils::Result;
 
 //#[derive(Debug)]
 pub(in crate::manager) struct UnitManagerX {
@@ -347,7 +347,7 @@ impl UnitManager {
             log::debug!("job exec success");
             Ok(())
         } else {
-            Err(MngErrno::Internel)
+            Err(MngErrno::Internal)
         }
     }
 
@@ -379,7 +379,7 @@ impl UnitManager {
             )?;
             Ok(())
         } else {
-            Err(MngErrno::Internel)
+            Err(MngErrno::Internal)
         }
     }
 
@@ -980,11 +980,11 @@ mod tests {
     use crate::manager::unit::data::UnitActiveState;
     use crate::mount::mount_setup;
     use libevent::Events;
+    use libutils::logger;
     use nix::errno::Errno;
     use nix::sys::signal::Signal;
     use std::thread;
     use std::time::Duration;
-    use utils::logger;
 
     fn init_dm_for_test() -> (Rc<DataManager>, Rc<Events>, Rc<UnitManager>) {
         logger::init_log_with_console("manager test", 4);

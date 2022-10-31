@@ -5,13 +5,13 @@
 use super::target_base::{LOG_LEVEL, PLUGIN_NAME};
 use super::target_comm::TargetUnitComm;
 use super::target_mng::TargetMng;
+use libutils::logger;
 use process1::manager::{
     UnitActiveState, UnitDependencyMask, UnitManager, UnitMngUtil, UnitObj, UnitRelationAtom,
     UnitRelations, UnitSubClass,
 };
 use process1::{ReStation, Reliability};
 use std::{path::PathBuf, rc::Rc};
-use utils::logger;
 
 struct Target {
     comm: Rc<TargetUnitComm>,
@@ -87,7 +87,7 @@ impl Target {
 }
 
 impl UnitObj for Target {
-    fn load(&self, _conf_str: Vec<PathBuf>) -> utils::Result<(), Box<dyn std::error::Error>> {
+    fn load(&self, _conf_str: Vec<PathBuf>) -> libutils::Result<(), Box<dyn std::error::Error>> {
         //todo add default dependency funnction need add
         log::debug!("load for target");
         self.add_default_dependencies();
@@ -109,7 +109,7 @@ impl UnitObj for Target {
 
     fn dump(&self) {}
 
-    fn start(&self) -> utils::Result<(), process1::manager::UnitActionError> {
+    fn start(&self) -> libutils::Result<(), process1::manager::UnitActionError> {
         //if current state is not valid, just return.
         self.mng.start_check()?;
 
@@ -117,7 +117,7 @@ impl UnitObj for Target {
         Ok(())
     }
 
-    fn stop(&self, force: bool) -> utils::Result<(), process1::manager::UnitActionError> {
+    fn stop(&self, force: bool) -> libutils::Result<(), process1::manager::UnitActionError> {
         if !force {
             self.mng.stop_check()?;
         }

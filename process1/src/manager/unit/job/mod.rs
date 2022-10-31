@@ -9,7 +9,7 @@ pub(super) enum JobErrno {
     Input,
     Conflict,
     NotExisted,
-    Internel,
+    Internal,
     NotSupported,
     BadRequest,
 }
@@ -21,7 +21,7 @@ impl From<JobErrno> for MngErrno {
             JobErrno::Input => MngErrno::Input,
             JobErrno::NotExisted => MngErrno::NotExisted,
             JobErrno::NotSupported => MngErrno::NotSupported,
-            _ => MngErrno::Internel,
+            _ => MngErrno::Internal,
         }
     }
 }

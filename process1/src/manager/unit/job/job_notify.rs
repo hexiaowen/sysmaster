@@ -135,7 +135,7 @@ mod tests {
     use crate::manager::unit::unit_rentry::{UnitRe, UnitType};
     use crate::plugin::Plugin;
     use crate::reliability::Reliability;
-    use utils::logger;
+    use libutils::logger;
 
     #[test]
     fn jn_api() {
@@ -171,7 +171,7 @@ mod tests {
         let db = Rc::new(UnitDb::new(&rentry));
         let name_test1 = String::from("test1.service");
         let unit_test1 = create_unit(&dm, &reli, &rentry, &name_test1);
-        db.units_insert(name_test1.clone(), Rc::clone(&unit_test1));
+        db.units_insert(name_test1, Rc::clone(&unit_test1));
         (reli, db, unit_test1)
     }
 

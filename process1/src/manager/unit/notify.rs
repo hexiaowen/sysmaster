@@ -6,6 +6,8 @@ use crate::manager::rentry::ReliLastFrame;
 use crate::reliability::{ReStation, Reliability};
 use libc;
 use libevent::{EventState, EventType, Events, Source};
+use libutils::fd_util;
+use libutils::Error;
 use nix::cmsg_space;
 use nix::errno::Errno;
 use nix::sys::socket::{
@@ -16,8 +18,6 @@ use std::{
     cell::RefCell, collections::HashMap, fs, io::IoSliceMut, os::unix::prelude::RawFd,
     path::PathBuf, rc::Rc,
 };
-use utils::fd_util;
-use utils::Error;
 
 const NOTIFY_SOCKET: &str = "/run/process1/notify";
 
