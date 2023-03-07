@@ -34,11 +34,8 @@ pub struct CommandResponse {
     /// stat code; HTTP 2xx/4xx/5xx
     #[prost(uint32, tag="1")]
     pub status: u32,
-    /// returned error_code, 0 for success, a positive value for failure
-    #[prost(uint32, tag="2")]
-    pub error_code: u32,
     /// if not 2xx，message include more information
-    #[prost(string, tag="3")]
+    #[prost(string, tag="2")]
     pub message: ::prost::alloc::string::String,
 }
 #[rustfmt::skip]

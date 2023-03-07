@@ -12,16 +12,14 @@
 
 //!
 
+use basic::Error;
+use basic::Result;
 use clap::Parser;
 use cmdproto::proto::{
     abi::{sys_comm, unit_comm, CommandRequest},
     mngr_comm, unit_file, ProstClientStream,
 };
-use std::io::Write;
-use std::{
-    net::{SocketAddr, TcpStream},
-    process::{ExitCode, Termination},
-};
+use std::net::{SocketAddr, TcpStream};
 
 /// parse program arguments
 #[derive(Parser, Debug)]
@@ -175,45 +173,13 @@ fn generate_command_request(args: Args) -> Option<CommandRequest> {
     Some(command_request)
 }
 
-/// Result used in sctl
-pub enum Result {
-    ///
-    OK,
-    ///
-    Failure(String, u32),
-}
-
-/*
- * Implementing Termination is important. Because the default implementation
- * always adds a "Error: " prefix to our error message, this is ugly. And it
- * always exits with 1 if we return Err, this is bad, we want sctl to return
- * many other positive errors like systemctl has done.
- */
-
-impl Termination for Result {
-    fn report(self) -> ExitCode {
-        match self {
-            Result::OK => ExitCode::SUCCESS,
-            Result::Failure(s, error_code) => {
-                let _ = writeln!(std::io::stderr(), "{s}");
-                if error_code > u8::MAX.into() {
-                    return ExitCode::FAILURE;
-                }
-                ExitCode::from(error_code as u8)
-            }
-        }
-    }
-}
-
-fn main() -> Result {
+fn main() -> Result<(), Error> {
     let args = Args::parse();
 
     let command_request = match generate_command_request(args) {
         None => {
-            return Result::Failure(
-                "This command is currently not supported".to_string(),
-                nix::Error::ENOTSUP as u32,
-            );
+            println!("This command is currently not supported.");
+            return Ok(());
         }
         Some(command_request) => command_request,
     };
@@ -228,16 +194,9 @@ fn main() -> Result {
 
     let data = client.execute(command_request).unwrap();
 
-    /* We should always print the error message if the returned error code is not 0. */
-    if data.message.is_empty() {
-        return Result::OK;
+    if !data.message.is_empty() {
+        println!("{}", data.message);
     }
 
-    if data.error_code == 0 {
-        /* Don't care if we fail to write the error out. */
-        let _ = writeln!(std::io::stdout(), "{}", data.message);
-        return Result::OK;
-    }
-
-    Result::Failure(data.message, data.error_code)
+    Ok(())
 }
